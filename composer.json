@@ -1,0 +1,12 @@
+{
+	"name": "niptucker/herzen-admission-orm",
+    "require": {
+        "doctrine/orm":        "2.5.*@dev",
+        "doctrine/common":     "2.5.*@dev",
+        "doctrine/dbal":       "2.5.*@dev",
+        "zeptech/annotations": "*"
+    },
+    "autoload": {
+        "psr-0": {"": "Herzen/Admission/"}
+    }
+}
