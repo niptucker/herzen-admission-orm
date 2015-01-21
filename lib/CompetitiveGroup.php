@@ -2,8 +2,6 @@
 
 namespace Herzen\Admission;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
 * @Entity
 * @Table(name="abit_abiteducompgroup")
@@ -34,6 +32,20 @@ class CompetitiveGroup {
     * @JoinColumn(name="ref_abit_eduprograms",referencedColumnName="id")
     */
     protected $educationalProgram;
+
+    /**
+    * @ManyToOne(targetEntity="Faculty",fetch="LAZY")
+    * @JoinColumn(name="ref_abit_faculties",referencedColumnName="id")
+    */
+    protected $faculty;
+
+
+    /**************************************************************************/
+    /* METHODS                                                                */
+    /**************************************************************************/
+
+
+
 
     /**
      * Get id
@@ -116,5 +128,29 @@ class CompetitiveGroup {
     public function getEducationalProgram()
     {
         return $this->educationalProgram;
+    }
+
+    /**
+     * Set faculty
+     *
+     * @param \Herzen\Admission\Faculty $faculty
+     *
+     * @return CompetitiveGroup
+     */
+    public function setFaculty(\Herzen\Admission\Faculty $faculty = null)
+    {
+        $this->faculty = $faculty;
+
+        return $this;
+    }
+
+    /**
+     * Get faculty
+     *
+     * @return \Herzen\Admission\Faculty
+     */
+    public function getFaculty()
+    {
+        return $this->faculty;
     }
 }

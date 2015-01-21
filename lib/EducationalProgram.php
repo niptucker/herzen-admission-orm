@@ -2,8 +2,6 @@
 
 namespace Herzen\Admission;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
 * @Entity
 * @Table(name="abit_eduprograms")
@@ -44,6 +42,14 @@ class EducationalProgram {
     * @OneToMany(targetEntity="EntranceTest", mappedBy="educationalProgram")
     */
     protected $entranceTests;
+
+
+
+    /**************************************************************************/
+    /* METHODS                                                                */
+    /**************************************************************************/
+
+
 
     /**
      * Get id

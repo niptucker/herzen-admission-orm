@@ -4,9 +4,15 @@
         "doctrine/orm":        "2.5.*@dev",
         "doctrine/common":     "2.5.*@dev",
         "doctrine/dbal":       "2.5.*@dev",
-        "zeptech/annotations": "*"
+        "zeptech/annotations": "*",
+		"symfony/console": "~2.6",
+		"symfony/finder": "~2.6"
     },
+
     "autoload": {
-        "psr-0": {"": "Herzen/Admission/"}
+        "psr-4": {
+            "Herzen\\Admission\\":        "lib/",
+            "Herzen\\Admission\\Tests\\": "tests/"
+        }
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Herzen\Admission;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
 * @Entity
 * @Table(name="abit_entrant")
@@ -53,6 +51,13 @@ class Application {
     * @JoinColumn(name="ref_abit_abiturients",referencedColumnName="id")
     */
     protected $entrant;
+
+
+    /**************************************************************************/
+    /* METHODS                                                                */
+    /**************************************************************************/
+
+
 
     /**
      * Set status
@@ -236,5 +241,9 @@ class Application {
     public function getCompetitiveGroup()
     {
         return $this->competitiveGroup;
+    }
+
+    public function getL() {
+        return "L";
     }
 }

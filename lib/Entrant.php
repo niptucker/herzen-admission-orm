@@ -2,8 +2,6 @@
 
 namespace Herzen\Admission;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
 * @Entity
 * @Table(name="abit_abiturients")
