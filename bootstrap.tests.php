@@ -3,6 +3,7 @@
 use Doctrine\Common\ClassLoader;
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
+use Herzen\Admission\Tests\EntityManagerHelper;
 
 require_once __DIR__ . "/vendor/autoload.php";
 
@@ -19,4 +20,4 @@ $conn = require_once "db.connection.mysql.tests.php";
 // obtaining the entity manager
 $em = EntityManager::create($conn, $config);
 
-return $em;
+EntityManagerHelper::setEntityManager($em);
