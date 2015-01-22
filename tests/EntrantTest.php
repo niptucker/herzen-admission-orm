@@ -6,10 +6,16 @@ use Herzen\Admission\Entrant;
 
 class EntrantTest extends \PHPUnit_Framework_TestCase {
 
-    protected function setUp() {
+    protected $em;
+
+    public function setUp() {
+        $this->em = EntityManagerHelper::getEntityManager();
     }
 
-    public function testFind() {
+    public function testDefault() {
+
+        $entrant = $this->em->find("Herzen\Admission\Entrant", 96935);
+        $this->assertEquals($entrant->getLastname(), "Кавайный");
 
     }
 }
