@@ -1,21 +1,21 @@
 <?php
 
-namespace Herzen\Admission\Tests;
+namespace Herzen\Admission\Orm\Tests;
 
-use Herzen\Admission\Entrant;
+use Herzen\Admission\Orm\Entrant;
+use Herzen\Admission\Orm\Tests\Bootstrapper;
 
 class EntrantTest extends \PHPUnit_Framework_TestCase {
 
     protected $em;
+    protected $entrant;
 
     public function setUp() {
-        $this->em = EntityManagerHelper::getEntityManager();
+        $this->em = Bootstrapper::getEntityManager();
+        $this->entrant = $this->em->find("Herzen\Admission\Orm\Entrant", 96935);
     }
 
-    public function testDefault() {
-
-        $entrant = $this->em->find("Herzen\Admission\Entrant", 96935);
-        $this->assertEquals($entrant->getLastname(), "Кавайный");
-
+    public function testLastname() {
+        $this->assertEquals($this->entrant->getLastname(), "Кавайный");
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Herzen\Admission;
+namespace Herzen\Admission\Orm;
 
 /**
 * @Entity
@@ -44,6 +44,11 @@ class Entrant {
     * @Column(type="datetime",name="reg_datetime")
     */
     protected $registrationDate;
+
+    /**
+     * @Column(name="user_uuid", type="string", length=36, nullable=true)
+     */
+    protected $uuid;
 
 
     /**
@@ -243,4 +248,5 @@ class Entrant {
 
         return $this;
     }
+
 }

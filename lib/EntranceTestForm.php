@@ -1,6 +1,6 @@
 <?php
 
-namespace Herzen\Admission;
+namespace Herzen\Admission\Orm;
 
 /**
  * @Entity
