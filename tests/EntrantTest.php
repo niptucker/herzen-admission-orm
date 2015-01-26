@@ -18,4 +18,14 @@ class EntrantTest extends \PHPUnit_Framework_TestCase {
     public function testLastname() {
         $this->assertEquals($this->entrant->getLastname(), "Кавайный");
     }
+
+    public function testUuid() {
+        $this->assertEquals($this->entrant->getUuid(), "782d1d44-23ff-4854-befa-ebcfb65662a6");
+    }
+
+    public function testFindByUuid() {
+        $entrantRepository = $this->em->getRepository("Herzen\Admission\Orm\Entrant");
+        $entrant = $entrantRepository->findOneByUuid("782d1d44-23ff-4854-befa-ebcfb65662a6");
+        $this->assertEquals($entrant, $this->entrant);
+    }
 }

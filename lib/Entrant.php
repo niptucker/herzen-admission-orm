@@ -6,7 +6,7 @@ namespace Herzen\Admission\Orm;
 * @Entity
 * @Table(name="abit_abiturients")
 */
-class Entrant {
+class Entrant implements UniversallyUniqueIdentifiable {
 
     /**
     * @Id
@@ -247,6 +247,30 @@ class Entrant {
         $this->registrationDate = $registrationDate;
 
         return $this;
+    }
+
+    /**
+     * Set uuid
+     *
+     * @param string $uuid
+     *
+     * @return Entrant
+     */
+    public function setUuid($uuid)
+    {
+        $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    /**
+     * Get uuid
+     *
+     * @return string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
     }
 
 }
