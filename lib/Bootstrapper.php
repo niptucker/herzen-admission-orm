@@ -12,7 +12,7 @@ abstract class Bootstrapper {
         return self::$em;
     }
 
-    protected static function bootstrap($connectionFile) {
+    public static function bootstrap($connectionFile) {
         $libRoot = __DIR__;
 
         // Create a simple "default" Doctrine ORM configuration for Annotations
@@ -21,7 +21,7 @@ abstract class Bootstrapper {
 
         // mysql
         // database configuration parameters
-        $conn = require_once self::$connectionFile;
+        $conn = require_once $connectionFile;
 
         // obtaining the entity manager
         self::$em = EntityManager::create($conn, $config);
