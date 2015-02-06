@@ -1,0 +1,18 @@
+{
+    "name": "niptucker/herzen-admission-orm",
+    "require": {
+        "doctrine/orm":         "2.5.*@dev",
+        "doctrine/common":      "2.5.*@dev",
+        "doctrine/dbal":        "2.5.*@dev",
+        "zeptech/annotations":  "*",
+        "symfony/console":      "~2.6",
+        "symfony/finder":       "~2.6"
+    },
+
+    "autoload": {
+        "psr-4": {
+            "Herzen\\Admission\\Orm\\":         "lib/",
+            "Herzen\\Admission\\Orm\\Tests\\":  "tests/"
+        }
+    }
+}
