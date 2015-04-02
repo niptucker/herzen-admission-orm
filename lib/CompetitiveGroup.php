@@ -28,16 +28,22 @@ class CompetitiveGroup {
     protected $isActive;
 
     /**
-    * @ManyToOne(targetEntity="EducationalProgram",fetch="LAZY")
-    * @JoinColumn(name="ref_abit_eduprograms",referencedColumnName="id")
+    * @ManyToOne(targetEntity="EducationalProgram", fetch="LAZY")
+    * @JoinColumn(name="ref_abit_eduprograms", referencedColumnName="id")
     */
     protected $educationalProgram;
 
     /**
-    * @ManyToOne(targetEntity="Faculty",fetch="LAZY")
-    * @JoinColumn(name="ref_abit_faculties",referencedColumnName="id")
+    * @ManyToOne(targetEntity="Faculty", fetch="LAZY")
+    * @JoinColumn(name="ref_abit_faculties", referencedColumnName="id")
     */
     protected $faculty;
+
+    /**
+    * @ManyToOne(targetEntity="Campaign", fetch="LAZY")
+    * @JoinColumn(name="ref_abit_campaign", referencedColumnName="id")
+    */
+    protected $campaign;
 
 
     /**************************************************************************/
@@ -152,5 +158,29 @@ class CompetitiveGroup {
     public function getFaculty()
     {
         return $this->faculty;
+    }
+
+    /**
+     * Set campaign
+     *
+     * @param \Herzen\Admission\Orm\Campaign $campaign
+     *
+     * @return CompetitiveGroup
+     */
+    public function setCampaign(\Herzen\Admission\Orm\Campaign $campaign = null)
+    {
+        $this->campaign = $campaign;
+
+        return $this;
+    }
+
+    /**
+     * Get campaign
+     *
+     * @return \Herzen\Admission\Orm\Campaign
+     */
+    public function getCampaign()
+    {
+        return $this->campaign;
     }
 }
