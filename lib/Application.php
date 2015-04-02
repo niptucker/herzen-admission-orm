@@ -6,7 +6,7 @@ namespace Herzen\Admission\Orm;
 * @Entity
 * @Table(name="abit_entrant")
 */
-class Application {
+class Application implements ApplicationInterface {
 
     /**
     * @Id
@@ -243,7 +243,55 @@ class Application {
         return $this->competitiveGroup;
     }
 
-    public function getL() {
-        return "L";
+    public function getNumber()
+    {
+        return $this->getId();
+    }
+
+    public function __toString()
+    {
+        return "[Application #" . $this->getId() . "]";
+    }
+
+    public function setEnrollable($isEnrollable)
+    {
+        throw new \Exception("Not implemented yet");
+        // TODO: Implement setEnrollable() method.
+    }
+
+    public function isEnrollable()
+    {
+        throw new \Exception("Not implemented yet");
+        // TODO: Implement isEnrollable() method.
+    }
+
+    public function isEnrolled()
+    {
+        throw new \Exception("Not implemented yet");
+        // TODO: Implement isEnrolled() method.
+    }
+
+    public function enroll()
+    {
+        throw new \Exception("Not implemented yet");
+        // TODO: Implement enroll() method.
+    }
+
+    public function cancelEnrollment()
+    {
+        throw new \Exception("Not implemented yet");
+        // TODO: Implement cancelEnrollment() method.
+    }
+
+    public function dismiss()
+    {
+        throw new \Exception("Not implemented yet");
+        // TODO: Implement dismiss() method.
+    }
+
+    public function cancelDismission()
+    {
+        throw new \Exception("Not implemented yet");
+        // TODO: Implement cancelDismission() method.
     }
 }
