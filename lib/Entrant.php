@@ -6,7 +6,7 @@ namespace Herzen\Admission\Orm;
 * @Entity
 * @Table(name="abit_abiturients")
 */
-class Entrant implements UniversallyUniqueIdentifiable {
+class Entrant implements EntrantInterface, UniversallyUniqueIdentifiable {
 
     /**
     * @Id
@@ -49,6 +49,14 @@ class Entrant implements UniversallyUniqueIdentifiable {
      * @Column(name="user_uuid", type="string", length=36, nullable=true)
      */
     protected $uuid;
+
+
+
+    /**
+    * @ManyToOne(targetEntity="Herzen\Admission\Orm\Form\Scenario", fetch="LAZY")
+    * @JoinColumn(name="ref_abit_scenario", referencedColumnName="id")
+    */
+    protected $scenario;
 
 
     /**
@@ -147,26 +155,26 @@ class Entrant implements UniversallyUniqueIdentifiable {
     }
 
     /**
-     * Add applications
+     * Add application
      *
-     * @param Application $applications
+     * @param ApplicationInterface $application
      * @return Entrant
      */
-    public function addApplication(Application $applications)
+    public function addApplication(ApplicationInterface $application)
     {
-        $this->applications[] = $applications;
+        $this->applications[] = $application;
 
         return $this;
     }
 
     /**
-     * Remove applications
+     * Remove application
      *
-     * @param Application $applications
+     * @param ApplicationInterface $application
      */
-    public function removeApplication(Application $applications)
+    public function removeApplication(ApplicationInterface $application)
     {
-        $this->applications->removeElement($applications);
+        $this->applications->removeElement($application);
     }
 
     /**
@@ -273,4 +281,33 @@ class Entrant implements UniversallyUniqueIdentifiable {
         return $this->uuid;
     }
 
+
+    public function isEnrolled() {
+        throw new Exception("Not implemented yet");
+
+    }
+
+    /**
+     * Set scenario
+     *
+     * @param \Herzen\Admission\Orm\Form\Scenario $scenario
+     *
+     * @return Entrant
+     */
+    public function setScenario(\Herzen\Admission\Orm\Form\Scenario $scenario = null)
+    {
+        $this->scenario = $scenario;
+
+        return $this;
+    }
+
+    /**
+     * Get scenario
+     *
+     * @return \Herzen\Admission\Orm\Form\Scenario
+     */
+    public function getScenario()
+    {
+        return $this->scenario;
+    }
 }
