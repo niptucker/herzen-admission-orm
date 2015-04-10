@@ -6,13 +6,24 @@
         "doctrine/dbal":        "2.5.*@dev",
         "zeptech/annotations":  "*",
         "symfony/console":      "~2.6",
-        "symfony/finder":       "~2.6"
+        "symfony/finder":       "~2.6",
+
+
+        "niptucker/phperge":    "dev-master"
     },
+
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/niptucker/phperge"
+        }
+    ],
 
     "autoload": {
         "psr-4": {
             "Herzen\\Admission\\Orm\\":         "lib/",
-            "Herzen\\Admission\\Orm\\Tests\\":  "tests/"
+            "Herzen\\Admission\\Orm\\Tests\\":  "tests/",
+            "Herzen\\Utils\\":                  "../herzen-utils/lib/" // https://github.com/niptucker/herzen-utils
         }
     }
 }
