@@ -4,10 +4,13 @@ namespace Herzen\Admission\Orm\Enrollment;
 
 use Herzen\Admission\Orm\Enrollment\EnrollmentInterface;
 use Herzen\Admission\Orm\CampaignInterface;
+use Herzen\Admission\Orm\EnrollmentListInterface;
 
 abstract class BasicEnrollment implements EnrollmentInterface {
 
-    protected $campaign;
+    protected $enrollmentList;
+
+    // protected $applications = array();
 
     // protected $allApplications = array();
 
@@ -15,13 +18,18 @@ abstract class BasicEnrollment implements EnrollmentInterface {
 
     // protected $enrolledApplications = array();
 
-    public function __construct(CampaignInterface $campaign)
+    public function __construct(EnrollmentListInterface $enrollmentList)
     {
-        $this->campaign = $campaign;
+        $this->enrollmentList = $enrollmentList;
     }
 
-    public function getCampaign() {
-        return $this->campaign;
+    public function getEnrollmentList() {
+        return $this->enrollmentList;
+    }
+
+    public function getApplications()
+    {
+        return $this->enrollmentList->getApplications();
     }
 
     // public function getAllApplications()

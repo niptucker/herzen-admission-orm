@@ -34,12 +34,20 @@ $applications = $applicationRealMockGenerator->getApplications($campaign);
 
 $entrants = Orm\EntrantMock::getEntrants();
 
-foreach ($entrants as $entrant) {
-    echo $entrant->echoFull() . "\n\n";
+if (0) {
+    $eCount = 0;
+    foreach ($entrants as $entrant) {
+        echo sprintf("%6.d", ++$eCount) . ' ' . $entrant->echoFull() . "\n\n";
+    }
+    die;
 }
 
-foreach ($campaign->getCompetitiveGroups() as $cg) {
-    echo $cg->echoFull() . "\n\n";
+if (0) {
+    $cgCount = 0;
+    foreach ($campaign->getCompetitiveGroups() as $cg) {
+        echo sprintf("%6.d", ++$cgCount) . ' ' . $cg->echoFull() . "\n\n";
+    }
+    die;
 }
 
 var_dump("Priority enrollment for campaign, max priority is " . $campaign->getMaxPriority());

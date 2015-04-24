@@ -7,7 +7,7 @@ use Herzen\Utils\RandomUtils;
 /**
  * Competitive Group Mock
  */
-class CompetitiveGroupMock implements CompetitiveGroupInterface {
+class CompetitiveGroupMock extends Mock implements CompetitiveGroupInterface {
     // , EnrollableByPriorityInterface
 
     protected static $lastId = 0;
@@ -20,6 +20,12 @@ class CompetitiveGroupMock implements CompetitiveGroupInterface {
     protected $plans = array();
 
     protected $applications;
+
+    protected $color;
+
+    protected $planQuota;
+
+    protected $planTarget;
 
 
     protected static $cgs = array();
@@ -49,6 +55,9 @@ class CompetitiveGroupMock implements CompetitiveGroupInterface {
         $this->ref_abit_eedufinancing = $ref_abit_eedufinancing;
         $this->ref_abit_eeduform = $ref_abit_eeduform;
         $this->ref_abit_edugrade = $ref_abit_edugrade;
+
+        #todo: перенести в наследника
+        $this->color = RandomUtils::getRandomColor();
     }
 
 
@@ -160,11 +169,19 @@ class CompetitiveGroupMock implements CompetitiveGroupInterface {
         return $this->applications;
     }
 
-    public function getEnrolledApplications()
+    public function getEnrolledApplications(EnrollmentStageInterface $stage = null)
     {
-        return array_filter($this->applications, function($app) {
+        $enrolledApps = array_filter($this->applications, function($app) {
                 return $app->isEnrolled();
             });
+
+        if ($stage) {
+            $enrolledApps = array_filter($enrolledApps, function($app) use ($stage) {
+                return $app->getEnrollmentStage() == $stage;
+            });
+        }
+
+        return $enrolledApps;
     }
 
     public function getEnrollableApplications()
@@ -200,4 +217,29 @@ class CompetitiveGroupMock implements CompetitiveGroupInterface {
 
         return $this;
     }
+
+    public function getColor() {
+        return $this->color;
+    }
+
+    public function setPlanQuota($planQuota) {
+        $this->planQuota = $planQuota;
+
+        return $this;
+    }
+
+    public function getPlanQuota() {
+        return $this->planQuota;
+    }
+
+    public function setPlanTarget($planTarget) {
+        $this->planTarget = $planTarget;
+
+        return $this;
+    }
+
+    public function getPlanTarget() {
+        return $this->planTarget;
+    }
+
 }

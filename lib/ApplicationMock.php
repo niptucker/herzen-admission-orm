@@ -4,7 +4,7 @@ namespace Herzen\Admission\Orm;
 
 use Herzen\Utils\ColorsUniversal;
 
-class ApplicationMock implements ApplicationInterface, PriorityApplicationInterface {
+class ApplicationMock extends Mock implements ApplicationInterface, PriorityApplicationInterface {
 
     protected static $lastNumber = 0;
 
@@ -16,7 +16,7 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
 
     protected $number;
 
-    protected $scoresum;
+    protected $pointsTotal;
 
     protected $isEnrollable = false;
 
@@ -26,7 +26,20 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
 
     protected $priority;
 
-    protected $enrollStage;
+    protected $comment = '';
+
+    protected $enrollmentStage;
+
+    protected $isQuota = false;
+
+    protected $isTarget = false;
+
+    protected $isNoexams = false;
+
+    protected $competitiveListPosition;
+
+    protected $enrollmentListPosition;
+
 
     public function __construct($entrant, $competitiveGroup, $priority = null, $number = null)
     {
@@ -50,22 +63,27 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
         $this->isEnrollable = true;
     }
 
+    public function getId()
+    {
+        return $this->number;
+    }
+
     public function getNumber()
     {
         return $this->number;
     }
 
-    public function getScoresum()
+    public function getPointsTotal()
     {
-        return $this->scoresum;
+        return $this->pointsTotal;
     }
 
     public function getEntrant() {
         return $this->entrant;
     }
 
-    public function getEnrollStage() {
-        return $this->enrollStage;
+    public function getEnrollmentStage() {
+        return $this->enrollmentStage;
     }
 
     public function getCompetitiveGroup() {
@@ -78,7 +96,7 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
             . (new ColorsUniversal())->getColoredString(''
                     . "З №" . $this->getNumber()
                     . ', п'
-                    . ', сумма - ' . $this->getScoresum() . ' баллов '
+                    . ', сумма - ' . $this->getPointsTotal() . ' баллов '
                     . ((new ColorsUniversal())->getColoredString($this->getPriority()
                                 , $this->getPriorityFColor()
                                 , $this->getPriorityBColor()
@@ -93,13 +111,13 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
                                 , $this->getPriorityBColor()
                                 )
                             . ' п в этап '
-                            . $this->getEnrollStage()
+                            . $this->getEnrollmentStage()
                             . ' на КГ #'
                             . $this->competitiveGroup->getId()
                             . '')
                         : '')
                     . ''
-                , $this->isEnrollable() ? "white" : "dark_gray"
+                , $this->isEnrollable() ? "white" : "gray"
                 , $this->isEnrolled ? $this->getPriorityFColor() : "black"
             );
     }
@@ -123,9 +141,9 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
 
     public function enroll($stage = null)
     {
-        if ($this->isEnrollable($stage) && !$this->isDismissed()) {
+        if ($this->isEnrollable() && !$this->isDismissed()) {
             $this->isEnrolled = true;
-            $this->enrollStage = $stage;
+            $this->enrollmentStage = $stage;
             $this->entrant->setEnrollApplication($this);
         }
 
@@ -168,6 +186,17 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
         return $this->priority;
     }
 
+
+    public function setComment($comment) {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    public function getComment() {
+        return $this->comment;
+    }
+
     protected $priorityColors = array("1" => "green", "2" => "yellow", "3" => "red");
 
     public function getPriorityFColor() {
@@ -184,8 +213,8 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
         return $this;
     }
 
-    public function setScoresum($scoresum) {
-        $this->scoresum = $scoresum;
+    public function setPointsTotal($pointsTotal) {
+        $this->pointsTotal = $pointsTotal;
 
         return $this;
     }
@@ -193,4 +222,52 @@ class ApplicationMock implements ApplicationInterface, PriorityApplicationInterf
     public static function getMaxPriority() {
         return static::$maxPriority;
     }
+
+
+    public function setIsQuota($isQuota) {
+        $this->isQuota = $isQuota;
+
+        return $this;
+    }
+
+    public function getIsQuota() {
+        return $this->isQuota;
+    }
+
+    public function setIsTarget($isTarget) {
+        $this->isTarget = $isTarget;
+
+        return $this;
+    }
+
+    public function getIsTarget() {
+        return $this->isTarget;
+    }
+
+    public function setIsNoexams($isNoexams) {
+        $this->isNoexams = $isNoexams;
+
+        return $this;
+    }
+
+    public function getIsNoexams() {
+        return $this->isNoexams;
+    }
+
+    public function getEnrollmentListPosition() {
+        return $this->enrollmentListPosition;
+    }
+
+    public function setEnrollmentListPosition($enrollmentListPosition) {
+        return $this->enrollmentListPosition = $enrollmentListPosition;
+    }
+
+    public function getCompetitiveListPosition() {
+        return $this->competitiveListPosition;
+    }
+
+    public function setCompetitiveListPosition($competitiveListPosition) {
+        return $this->competitiveListPosition = $competitiveListPosition;
+    }
+
 }

@@ -5,7 +5,7 @@ namespace Herzen\Admission\Orm;
 use Herzen\Utils\ColorsUniversal;
 use Herzen\Utils\Colors;
 
-class EntrantMock implements EntrantInterface {
+class EntrantMock extends Mock implements EntrantInterface {
 
     protected static $lastId = 0;
 
@@ -78,7 +78,7 @@ class EntrantMock implements EntrantInterface {
                     , $this->getEnrollApplication()->getPriorityBColor()
                     )
                 . ' п в этап '
-                . $this->getEnrollApplication()->getEnrollStage()
+                . $this->getEnrollApplication()->getEnrollmentStage()->getName()
                 . ' на КГ #' . $this->getEnrollApplication()->getCompetitiveGroup()->getId()
                 . ')' : '')
             . '';
@@ -148,12 +148,12 @@ class EntrantMock implements EntrantInterface {
     public function setEnrollApplication($application) {
         $this->enrollApplication = $application;
 
-        foreach ($this->applications as $app) {
-            if ($app != $application) {
-                // var_dump("Dis: " . $app->getNumber() . ' _ ' . $application->getNumber(), $app != $application);
-                $app->setEnrollable(false);
-            }
-        }
+        // foreach ($this->applications as $app) {
+        //     if ($app != $application) {
+        //         // var_dump("Dis: " . $app->getNumber() . ' _ ' . $application->getNumber(), $app != $application);
+        //         $app->setEnrollable(false);
+        //     }
+        // }
 
         return $this;
     }

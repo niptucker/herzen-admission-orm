@@ -2,19 +2,20 @@
 
 namespace Herzen\Admission\Orm\Enrollment;
 
-use Herzen\Admission\Orm\CampaignInterface;
+use Herzen\Admission\Orm\EnrollmentListInterface;
+use Herzen\Admission\Orm\EnrollmentStageInterface;
 
 interface EnrollmentInterface {
 
-    public function __construct(CampaignInterface $campaign);
+    public function __construct(EnrollmentListInterface $list);
 
-    public function getCampaign();
+    public function getEnrollmentList();
 
     // public function getAllApplications();
 
     // public function getApplicationsToEnroll();
 
-    public function enroll($stage);
+    public function enroll(EnrollmentStageInterface $stage);
 
     // public function getEnrolledApplications();
 

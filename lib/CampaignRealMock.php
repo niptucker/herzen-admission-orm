@@ -8,11 +8,14 @@ use Herzen\Admission\Orm\CompetitiveGroupMockGenerator;
 /**
  * Admission Campaign Mock
  */
-class CampaignRealMock implements CampaignInterface {
+class CampaignRealMock extends Mock implements CampaignInterface {
 
     protected $competitiveGroups = array();
 
+    protected $id;
+
     public function __construct() {
+        $this->id = 1;
     }
 
     public function addCompetitiveGroup($competitiveGroup) {
@@ -21,6 +24,10 @@ class CampaignRealMock implements CampaignInterface {
 
     public function getCompetitiveGroups() {
         return $this->competitiveGroups;
+    }
+
+    public function getId() {
+        return $this->id;
     }
 
     /**

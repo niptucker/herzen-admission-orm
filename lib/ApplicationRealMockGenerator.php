@@ -51,8 +51,11 @@ class ApplicationRealMockGenerator {
             $ref_abit_target_regions = $line_exploded[$i++];
 
             $plan = $line_exploded[$i++];
+            if ($cg_id == 7104) {
+                $plan = 28;
+            }
             $planQuota = $line_exploded[$i++];
-            $planRegion = $line_exploded[$i++];
+            $planTarget = $line_exploded[$i++];
 
             $code = $line_exploded[$i++];
 
@@ -60,9 +63,15 @@ class ApplicationRealMockGenerator {
             $ref_abit_eeduform = $line_exploded[$i++];
             $ref_abit_edugrade = $line_exploded[$i++];
 
+            $has_achievements_honor = $line_exploded[$i++];
+            $has_achievements_sport = $line_exploded[$i++];
+            $has_achievements_contest = $line_exploded[$i++];
+
 
             $entrant = EntrantMock::getInstance($entrant_id, $gender, $lastname, $firstname, $patronymic);
             $competitiveGroup = CompetitiveGroupMock::getInstance($cg_id, $cg_name, $plan, $ref_abit_eedufinancing, $ref_abit_eeduform, $ref_abit_edugrade);
+            $competitiveGroup->setPlanQuota($planQuota);
+            $competitiveGroup->setPlanTarget($planTarget);
 
             if (!in_array($competitiveGroup, $campaign->getCompetitiveGroups())) {
                 $campaign->addCompetitiveGroup($competitiveGroup);
@@ -70,7 +79,10 @@ class ApplicationRealMockGenerator {
 
             $app = new ApplicationMock($entrant, $competitiveGroup, $priority, $app_number);
             $app->setEnrollable($is_original);
-            $app->setScoresum($scoresum);
+            $app->setPointsTotal($scoresum + $has_achievements_honor + $has_achievements_sport + $has_achievements_contest);
+            $app->setIsQuota((boolean)$outofcompetition);
+            $app->setIsTarget((boolean)$ref_abit_target_regions);
+            $app->setIsNoexams((boolean)$is_noexam);
             $apps[] = $app;
         }
 
