@@ -23,7 +23,7 @@
         "psr-4": {
             "Herzen\\Admission\\Orm\\":         "lib/",
             "Herzen\\Admission\\Orm\\Tests\\":  "tests/",
-            "Herzen\\Utils\\":                  "../herzen-utils/lib/" // https://github.com/niptucker/herzen-utils
+            "Herzen\\Utils\\":                  "../herzen-utils/lib/"
         }
     }
 }
